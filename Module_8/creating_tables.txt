@@ -1,0 +1,32 @@
+-- creating table students
+    CREATE TABLE students (
+    ID INT NOT NULL PRIMARY KEY,
+    name VARCHAR (128) NOT NULL,
+    group VARCHAR (128) NOT NULL
+);
+
+-- creating table grades
+    CREATE TABLE grades (
+    grade_id INT NOT NULL,
+    ID INT NOT NULL PRIMARY KEY,
+    lesson VARCHAR (128) NOT NULL,
+    mark INT NOT NULL,
+    mark_date VARCHAR (128) NOT NULL,
+    CONSTRAINT fk_grades_students FOREIGN KEY (ID) REFERENCES students (ID)
+);
+
+-- creating table teachers
+    CREATE TABLE teachers (
+    ID INT NOT NULL PRIMARY KEY,
+    name VARCHAR (128) NOT NULL,
+    CONSTRAINT fk_teachers_students FOREIGN KEY (ID) REFERENCES students (ID)
+);
+
+-- creating table lessons
+    CREATE TABLE lessons (
+    ID INT NOT NULL PRIMARY KEY,
+    title VARCHAR (128) NOT NULL,
+    teacher VARCHAR (128) NOT NULL,
+    CONSTRAINT fk_lessons_students FOREIGN KEY (ID) REFERENCES students (ID)
+)
+

@@ -1,0 +1,76 @@
+-- 5 students with the highest average mark in all subjects
+    SELECT grades.id, MAX(AVG(mark)) OVER(), student_name
+    FROM grades JOIN students ON grades.id = students.id
+    GROUP BY grades.id, student_name
+    LIMITED 5
+
+-- 1 student with the highest average mark in one subject
+    SELECT grades.id, MAX(AVG(mark)) OVER(), student_name
+    FROM grades JOIN students ON grades.id = students.id
+    WHERE lesson = 'English'
+    GROUP BY grades.id, student_name
+    LIMITED 1
+
+-- average mark in a group in one subject
+    SELECT AVG(mark), group_title
+    FROM grades JOIN students ON grades.id = students.id
+    WHERE lesson = 'Programming' AND group_title = 'A'
+    GROUP BY group_title
+
+-- average mark in the stream
+    SELECT AVG(mark)
+    FROM grades
+
+-- what courses are taught by the teacher
+    SELECT teacher, title
+    FROM lessons
+    WHERE teacher = 'Prof.Bennett'
+    GROUP BY teacher, title
+
+-- list of students in the group
+    SELECT *
+    FROM students
+    WHERE group_title = 'B'
+
+-- grades of students in a group on a subject
+    SELECT mark, student_name, group_title, lesson
+    FROM students
+    JOIN grades ON grades.id = students.id
+    WHERE group_title = 'C' and lesson = 'Psychics'
+
+-- grades of students in a group on a subject in the last lesson (sorted from the last lesson)
+    SELECT mark, student_name, group_title, lesson, mark_date
+    FROM students
+    JOIN grades ON grades.id = students.id
+    WHERE group_title = 'C' and lesson = 'Psychics'
+    ORDER BY mark_date DESC
+
+-- the list of courses that the student is attending
+    SELECT student_name, lesson
+    FROM students
+    JOIN grades ON grades.id = students.id
+    WHERE student_name = 'Miranda Flores'
+    LIMIT 5
+
+-- list of courses that the teacher reads to the student
+    SELECT DISTINCT student_name, lesson, teacher
+    FROM grades
+    JOIN students ON grades.id = students.id
+    JOIN lessons ON grades.lesson = lessons.title
+    WHERE teacher = 'Prof.Washington' AND student_name = 'Miranda Flores'
+
+-- the average mark given by the teacher to the student
+    SELECT AVG(mark), student_name, teacher
+    FROM grades
+    JOIN students on grades.id = students.id
+    JOIN lessons on grades.lesson = lessons.title
+    WHERE teacher = 'Prof.Washington' AND student_name = 'Natasha Porter'
+    GROUP BY student_name, teacher
+
+-- the average mark given by the teacher
+    SELECT AVG(mark), teacher
+    FROM grades
+    JOIN lessons ON grades.lesson = lessons.title
+    WHERE teacher = 'Prof.Washington'
+    GROUP BY teacher
+
