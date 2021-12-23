@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<body style="background-color: MediumSeaGreen;">
+</body>
+<head>
+    <meta charset="UTF-8">
+    <title>Weather forecast</title>
+</head>
+<body>
+<h2>"Weather Aggregate"</h2>
+<h3>Forecast in city by "Open Weather" resource</h3>
+    <table>
+        <colgroup>
+            <col span="12" style="background-color: white">
+        </colgroup>
+        <tr>
+            <th>City</th>
+            <th>Temp C</th>
+            <th>Temp F</th>
+            <th>Clouds %</th>
+            <th>Wind km/h</th>
+            <th>Wind miles/h</th>
+            <th>Visibility km</th>
+            <th>Visibility miles</th>
+            <th>Barometer mb</th>
+            <th>Humidity %</th>
+            <th>Data</th>
+        </tr>
+        <tr>
+            <td>{{ ow_name }}</td>
+            <td>{{ ow_temp_c }}</td>
+            <td>{{ ow_temp_f }}</td>
+            <td>{{ ow_clouds }}</td>
+            <td>{{ ow_wind_kmh }}</td>
+            <td>{{ ow_wind_mh }}</td>
+            <td>{{ ow_visibility_km }}</td>
+            <td>{{ ow_visibility_m }}</td>
+            <td>{{ ow_pressure }}</td>
+            <td>{{ ow_humidity }}</td>
+            <td>{{ ow_dt }}</td>
+        </tr>
+    </table>
+<h3>Forecast in city by "Weather Api" resource</h3>
+    <table>
+        <colgroup>
+            <col span="12" style="background-color: white">
+        </colgroup>
+        <tr>
+            <th>City</th>
+            <th>Temp C</th>
+            <th>Temp F</th>
+            <th>Clouds %</th>
+            <th>Wind km/h</th>
+            <th>Wind miles/h</th>
+            <th>Visibility km</th>
+            <th>Visibility miles</th>
+            <th>Barometer mb</th>
+            <th>Humidity %</th>
+            <th>Data</th>
+        </tr>
+        <tr>
+            <td>{{ wi_name }}</td>
+            <td>{{ wi_temp_c }}</td>
+            <td>{{ wi_temp_f }}</td>
+            <td>{{ wi_cloud }}</td>
+            <td>{{ wi_wind_kph }}</td>
+            <td>{{ wi_wind_mph }}</td>
+            <td>{{ wi_vis_km }}</td>
+            <td>{{ wi_vis_miles }}</td>
+            <td>{{ wi_pressure }}</td>
+            <td>{{ wi_humidity }}</td>
+            <td>{{ wi_dt }}</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+aiohttp_jinja2 = '*'
+jinja2 = '*'
+asyncio = '*'
+aiohttp = '*'
+datetime = '*'
+motor = '*'
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
