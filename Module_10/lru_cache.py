@@ -37,3 +37,4 @@ if __name__ == '__main__':
     redis_user = redis.Redis(host='localhost', port=6380, db=0)
 
     analyze_cache('fred', redis_user)
+
