@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+click = "*"
+celery = "*"
+dnspython = "*"
+email-validator = "*"
+flask-admin = "*"
+flask-login = "*"
+flask-sqlalchemy = "*"
+flask-wtf = "*"
+idna = "*"
+itsdangerous = "*"
+jinja2 = "*"
+markupsafe = "*"
+sqlalchemy = "*"
+werkzeug = "*"
+wtforms = "*"
+psycopg2-binary = "*"
+docker-compose = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
