@@ -7,9 +7,10 @@ from init_db import db
 
 @aiohttp_jinja2.template('show_weather.html')
 async def index(request):
+    response = {}
     cursor_ow = db.open_weather.find().sort([['_id', -1]]).limit(1)
-    for document_ow in await cursor_ow.to_list(length=None):
-        response = aiohttp_jinja2.render_template('show_weather.html', request, {
+    for document_ow in cursor_ow:
+        response = {
             'ow_name': document_ow['name'],
             'ow_temp_c': (document_ow['main']['temp'] - 273.15).__round__(1),
             'ow_temp_f': ((document_ow['main']['temp'] - 273.15) * 9 / 5 + 32).__round__(1),
@@ -21,12 +22,11 @@ async def index(request):
             'ow_pressure': document_ow['main']['pressure'],
             'ow_humidity': document_ow['main']['humidity'],
             'ow_dt': datetime.fromtimestamp(document_ow['dt'])
-        })
-        return response
+        }
 
     cursor_wi = db.weather_api.find().sort([['_id', -1]]).limit(1)
-    for document_wi in await cursor_wi.to_list(length=None):
-        response = aiohttp_jinja2.render_template('show_weather.html', request, {
+    for document_wi in cursor_wi:
+        response.update({
             'wi_name': document_wi['location']['name'],
             'wi_temp_c': document_wi['current']['temp_c'],
             'wi_temp_f': document_wi['current']['temp_f'],
@@ -39,4 +39,4 @@ async def index(request):
             'wi_humidity': document_wi['current']['humidity'],
             'wi_dt': datetime.fromtimestamp(document_wi['current']['last_updated_epoch'])
         })
-        return response
+    return response

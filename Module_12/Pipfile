@@ -9,7 +9,8 @@ jinja2 = '*'
 asyncio = '*'
 aiohttp = '*'
 datetime = '*'
-motor = '*'
+pymongo = '*'
+
 
 [dev-packages]
 

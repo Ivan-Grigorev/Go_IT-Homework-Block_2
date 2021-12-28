@@ -10,7 +10,7 @@ async def get_open_weather(session, url):
     async with session.get(url) as resp:
         open_weather = await resp.json()
         from init_db import db
-        await db.open_weather.insert_one(open_weather)
+        db.open_weather.insert_many([open_weather])
         print("Weather forecast from 'Open Weather' successfully added to database!")
 
 
@@ -18,7 +18,7 @@ async def get_weather_api(session, url):
     async with session.get(url) as resp:
         weather_api = await resp.json()
         from init_db import db
-        await db.weather_api.insert_one(weather_api)
+        db.weather_api.insert_many([weather_api])
         print("Weather forecast from 'Weather API' successfully added to database!")
 
 
