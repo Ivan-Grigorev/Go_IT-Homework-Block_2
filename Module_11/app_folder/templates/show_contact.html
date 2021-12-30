@@ -4,12 +4,15 @@
 </body>
 <head>
     <meta charset="UTF-8">
-    <title>Show all</title>
+    <title>Show contact</title>
 </head>
 <body>
 <h2>"Address Book"</h2>
-<h3>Show all</h3>
+<h3>Show contact</h3>
     <table>
+        <colgroup>
+            <col span="4" style="background-color: white">
+        </colgroup>
         <tr>
             <th>Name</th>
             <th>Phone</th>
@@ -25,5 +28,10 @@
         </tr>
         {% endfor %}
     </table>
+    <dl>
+        <h1></h1>
+        <h1></h1>
+        <input type="button" onclick="location.href='/'" value="Back to main"/>
+    </dl>
 </body>
 </html>

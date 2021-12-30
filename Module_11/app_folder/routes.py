@@ -1,48 +1,44 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for
 
-from Module_11.app_folder import db, app
-from forms import AddContactForm
-from models import AddressBook
+from app_folder import db, app
+from app_folder.models import AddressBook
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def main():
-    return render_template('start_page.html')
+    return render_template('main_page.html')
 
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_contact():
-    form = AddContactForm()
-    if form.validate_on_submit():
-        contact = AddressBook(name=form.name.data, phone=form.phone.data,
-                              email=form.email.data, address=form.address.data)
+    if request.method == 'POST':
+        contact = AddressBook(name=request.form['name'].title(), phone=request.form['phone'],
+                              email=request.form['email'], address=request.form['address'])
         db.session.add(contact)
         db.session.commit()
-        flash("Successfully added contact!")
         return redirect(url_for('main'))
     return render_template('add.html')
 
 
-@app.route('/find', methods=['GET', 'Post'])
+@app.route('/find', methods=['GET', 'POST'])
 def find_contact():
-    if request.method == 'POST':
-        name = request.form.get('name').title()
-        return render_template('show.html', items=db.session.query(AddressBook).filter_by(name=name))
-    return render_template('find.html')
+    if request.method == 'GET':
+        return render_template('find.html')
+    return render_template('show_contact.html', items=db.session.query(AddressBook).filter_by(
+        name=request.form.get('name').title()))
 
 
-@app.route('/show', methods=['GET', 'POST'])
+@app.route('/show', methods=['GET'])
 def show_all():
-    return render_template('show.html', items=db.session.query(AddressBook).all())
+    return render_template('show_all.html', items=db.session.query(AddressBook).all())
 
 
 @app.route('/edit', methods=['GET', 'POST'])
 def edit_contact():
     if request.method == 'POST':
-        edited_name = request.form.get('edited_name').title()
-        edited_data = request.form.get('edited_data')
-        new_data = request.form.get('new_data')
-        db.session.query(AddressBook).filter(AddressBook.name == edited_name).update({edited_data: new_data})
+        db.session.query(AddressBook).filter(AddressBook.name == request.form.get('edited_name').title()).update(
+            {request.form.get('edited_data'): request.form.get('new_data')})
+        db.session.commit()
         return redirect(url_for('main'))
     return render_template('edit.html')
 
@@ -50,18 +46,18 @@ def edit_contact():
 @app.route('/delete', methods=['GET', 'POST'])
 def delete_contact():
     if request.method == 'POST':
-        deleted_name = request.form.get('deleted_name').title()
-        db.session.query(AddressBook).filter(AddressBook.name == deleted_name).delete()
+        db.session.query(AddressBook).filter(AddressBook.name == request.form['deleted_name'].title()).delete()
+        db.session.commit()
         return redirect(url_for('main'))
     return render_template('delete.html')
 
 
-@app.route('/reference', methods=['GET', 'POST'])
+@app.route('/reference')
 def help_command():
     return render_template('reference.html')
 
 
-@app.route('/exit', methods=['GET', 'POST'])
+@app.route('/exit')
 def exit_command():
     db.session.commit()
     db.session.close()

@@ -1,4 +1,4 @@
-from Module_11.app_folder import db
+from app_folder import db
 
 
 class AddressBook(db.Model):
