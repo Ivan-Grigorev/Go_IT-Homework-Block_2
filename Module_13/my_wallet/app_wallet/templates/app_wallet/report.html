@@ -1,0 +1,54 @@
+{% extends 'app_wallet/header.html' %}
+
+
+{% block content%}
+<title>Report</title>
+<div class="container">
+    <h2>{{ request.user.username }}, this is your payments in wallet by search:</h2>
+    <table>
+        <colgroup>
+            <col span="6" style="background-color: white; width: 200px">
+        </colgroup>
+        <tr>
+            <th>Payment ID</th>
+            <th>Admission</th>
+            <th>Consumption</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Inserted date</th>
+        </tr>
+        {% for item in payments %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.admission }}</td>
+            <td>{{ item.consumption }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.users_date }}</td>
+            <td>{{ item.insert_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1></h1>
+    <table>
+        <colgroup>
+            <col span="2" style="background-color: white; width: 600px">
+        </colgroup>
+        <tr>
+            <th class="text-center">All admissions</th>
+            <th class="text-center">All consumptions</th>
+        </tr>
+        {% for admission_value in admission__sum.values %}
+        {% for consumption_value in consumption__sum.values %}
+        <tr class="text-center">
+            <td>{{ admission_value }}</td>
+            <td>{{ consumption_value }}</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    </table>
+    <h1></h1>
+    <input type="button" onclick="location.href='/find'" value="Back">
+    <h1></h1>
+    <input type="button" onclick="location.href='/home'" value="Bact to homepage">
+</div>
+{% endblock %}

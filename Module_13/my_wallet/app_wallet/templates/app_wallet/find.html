@@ -1,0 +1,20 @@
+{% extends 'app_wallet/header.html' %}
+
+
+{% block content %}
+<title>Edit page</title>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <h2>{{ request.user.username }}, enter the period for search payments:</h2>
+        <label>From</label>
+        <input type="date" name="date_from" required value="">
+        <label>To</label>
+        <input type="date" name="date_to" required value="">
+        <h1></h1>
+        <input type="submit" value="Search">
+        <h1></h1>
+        <input type="button" onclick="location.href='/home'" value="Back to homepage">
+    </form>
+</div>
+{% endblock %}

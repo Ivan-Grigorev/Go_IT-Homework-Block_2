@@ -1,0 +1,30 @@
+{% extends 'app_wallet/header.html' %}
+
+
+{% block content %}
+<title>Home page</title>
+<div class="container text-center">
+    <h1>"My Wallet"</h1>
+    <h2>{{ request.user.username }}, choose an operation:</h2>
+    <style>
+        .btn {
+            margin: 20px;
+        }
+    </style>
+    <div>
+        <button type="button" class="btn btn-primary" style="background-color:white; width: 300px">
+            <a href="/add">Add payment</a></button>
+        <button type="button" class="btn btn-primary" style="background-color:white; width: 300px">
+            <a href="/find">Show payments by period</a></button>
+        <button type="button" class="btn btn-primary" style="background-color:white; width: 300px">
+            <a href="/edit">Edit payment</a></button>
+        <button type="button" class="btn btn-primary" style="background-color:white; width: 300px">
+            <a href="/show">Show all payments</a></button>
+        <button type="button" class="btn btn-primary" style="background-color:white; width: 300px">
+            <a href="/delete">Delete payment</a></button>
+        <button type="button" class="btn btn-primary" style="background-color:white; width: 300px">
+            <a href="/logout">Logout</a></button>
+    </div>
+</div>
+
+{% endblock %}

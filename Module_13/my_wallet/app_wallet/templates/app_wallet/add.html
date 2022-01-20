@@ -1,0 +1,26 @@
+{% extends 'app_wallet/header.html' %}
+
+
+{% block content %}
+<title>Add payment</title>
+<div class="container">
+    <form method="POST">
+        <h2>{{ request.user.username }}, fill the forms for add payment to your wallet:</h2>
+        {% csrf_token %}
+        <dl>
+            <dt>Admission:</dt>
+            <dd><input type="text" name="admission" size="50" required value="" placeholder="amount in numbers"></dd>
+            <dt>Consumption:</dt>
+            <dd><input type="text" name="consumption" size="50" required value="" placeholder="amount in numbers"></dd>
+            <dt>Description:</dt>
+            <dd><input type="text" name="description" size="50" placeholder="about payment"></dd>
+            <dt>Date:</dt>
+            <dd><input type="date" name="users_date" required value=""></dd>
+        </dl>
+        <input type="submit" value="Save">
+        <h1></h1>
+        <input type="button" onclick="location.href='/home'" value="Bact to homepage">
+    </form>
+</div>
+
+{% endblock %}

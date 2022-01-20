@@ -1,0 +1,29 @@
+{% extends 'app_wallet/header.html' %}
+
+
+{% block content %}
+<title>Delete page</title>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <h2>{{ request.user.username }}, for delete payment enter the "Payment ID":</h2>
+        <dl>
+            <dt>Payment ID:</dt>
+            <dd><input type="text" size="50" name="id" required value="" placeholder="Payment ID in numbers"></dd>
+            <h1></h1>
+            <p style="font-size:12px">How you can find "Payment ID":</p>
+                <ol>
+                    <li style="font-size:12px">Back to Homepage;</li>
+                    <li style="font-size:12px">Choose "Show payments by period" or "Show all payments"
+                        (<i>Recommended "Show payments by period");</i></li>
+                    <li style="font-size:12px">On opened pages you'll see the table. The left column shows "Payment ID"
+                        (<i>If you chose "Show payments by period", you'll need to enter dates first).</i></li>
+                </ol>
+        </dl>
+        <h1></h1>
+        <input type="submit" style="color:red" value="Confirm">
+        <h1></h1>
+        <input type="button" onclick="location.href='/home'" value="Back to homepage">
+    </form>
+</div>
+{% endblock %}
