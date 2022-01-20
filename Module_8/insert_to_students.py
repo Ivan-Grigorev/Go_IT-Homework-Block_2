@@ -7,11 +7,11 @@ from psycopg2 import Error
 
 
 try:
-    connection = psycopg2.connect(user='postgres',
-                                  password='pstgr_28.09_ig',
+    connection = psycopg2.connect(user='**********',
+                                  password='**********',
                                   host='127.0.0.1',
                                   port='5432',
-                                  database='module_8.hw'
+                                  database='**********'
                                   )
 
     cursor = connection.cursor()
