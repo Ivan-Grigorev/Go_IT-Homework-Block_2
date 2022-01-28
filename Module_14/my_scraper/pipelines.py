@@ -13,13 +13,18 @@ class MyScraperPipeline:
         session = self.Session()
         author_data = Authors()
         quotes_data = Quotes()
-        author_data.authors = item['authors']
+        author_data.name = item['name']
         author_data.author_link = item['author_link']
         quotes_data.tags = item['tags']
-        quotes_data.quotes = item['quotes']
+        quotes_data.quote_content = item['quotes']
+
+        exist_author = session.query(Authors).filter_by(name=author_data.name).first()
+        if exist_author:
+            quotes_data.authors = exist_author
+        else:
+            quotes_data.authors = author_data
 
         try:
-            session.add(author_data)
             session.add(quotes_data)
             session.commit()
         except:
