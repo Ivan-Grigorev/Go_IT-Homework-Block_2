@@ -33,7 +33,7 @@ class Quotes(Base):
 
     id = Column(Integer, primary_key=True)
     tags = Column('tags', String())
-    quote_content = Column('quotes', Text())
+    quote_content = Column('quotes', Text(), unique=True)
     author_id = Column(Integer, ForeignKey('authors.id'))
     inserted_date = Column(DateTime, default=datetime.now())
     authors = relationship('Authors', back_populates='quote')
